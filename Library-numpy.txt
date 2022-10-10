@@ -1,0 +1,672 @@
+----- Array Creation Methods -----
+1. Array
+	It is used to create one-dimensional or multidimensional arrays from scratch.
+	Important params:
+		dtype: desired data type for the resultant array.
+		ndim: Specify the minimum number of dimensions for the resultant array.
+	You can also use this function to convert series or dataframes into a NumPy array.
+	Example:
+		# sex = pd.Series(['Male','Male','Female'])
+		# np.array(sex)
+		------------------------
+			array(['Male', 'Male', 'Female'], dtype=object)
+2. Linspace
+	Creates an array with evenly spaced float numbers over a specified interval.
+		np.linspace(start, stop, num=50, endpoint=True, retstep=False, dtype=None, axis=0)
+	Important params:
+		start: starting index
+		end: last index
+		num: number of samples to generate, default = 50
+	Example:
+		# np.linspace(10,100,10)
+		--------------------------------
+			array([ 10.,  20.,  30.,  40.,  50.,  60.,  70.,  80.,  90., 100.])
+3. Arange
+	Return evenly spaced integer values over a given interval with some step size.
+		np.arange(start, stop, step, dtype=None)
+	Important params:
+		step: Space between values.
+	Example:
+		np.arange(5,10,2)
+		-----------------------
+			array([5, 7, 9])
+4. Uniform Samples
+	Generate a random sample from a uniform distribution between lower and higher limit values.
+		np.random.uniform(low=0.0, high=1.0, size=None)
+	Example:
+		np.random.uniform(5,10,size = 4)
+		------------
+			array([6.47445571, 5.60725873, 8.82192327, 7.47674099])
+
+		np.random.uniform(size = 5)
+		------------
+			array([0.83358092, 0.41776134, 0.72349553])
+
+		np.random.uniform(size = (2,3))
+		------------
+			array([[0.7032511 , 0.63212039, 0.6779683 ],
+				[0.81150812, 0.26845613, 0.99535264]])
+5. Random.randint
+	Generate n random integer samples within a range.
+		np.random.randint(low, high=None, size=None, dtype=int)
+	Example:
+		np.random.randint(5,10,10)
+		------------------------------
+			array([6, 8, 9, 9, 7, 6, 9, 8, 5, 9])
+6. Random.random
+	Generate n random float samples.
+		np.random(size=None)
+	Example:
+		np.random.random(3)
+		---------------------------
+			array([0.87656396, 0.24706716, 0.98950278])
+7. Logspace
+	Generate evenly spaced numbers on a log scale.
+		np.logspace(start, stop, num=50, endpoint=True, base=10.0, dtype=None, axis=0)
+	Important params:
+		start: starting value of the sequence.
+		end: last value of the sequence.
+		endpoint: if True, the last sample will be included in the sequence. 
+		base: The base of the log space. default is 10.
+	Example:
+		np.logspace(0,10,5,base=2)
+		------------------
+			array([1.00000000e+00, 5.65685425e+00, 3.20000000e+01, 1.81019336e+02,1.02400000e+03])
+8. Array of zero
+	np.zeroes function helps to create an array of 0.
+		np.zeros(shape, dtype=float, order='C')
+	Important params:
+		shape: shape of the resultant array.
+		dtype: desired data type of resultant array. ‘int’ or default ‘float’
+	Example:
+		np.zeros((2,3),dtype='int')
+		---------------
+			array([[0, 0, 0], 
+				[0, 0, 0]])
+		np.zeros(5)
+		-----------------
+			array([0., 0., 0., 0., 0.])
+9. Array of Ones
+	np.ones function helps to create an array of 1.
+		np.ones(shape, dtype=None, order='C')
+	Example:
+		np.ones((3,4))
+		------------------
+			array([[1., 1., 1., 1.],
+				[1., 1., 1., 1.],
+				[1., 1., 1., 1.]])
+10. Array of k Random Value
+	Creates an n-dimensional array of a random value.
+		np.full(shape, fill_value, dtype=None)
+	Important params:
+		fill_value: Random value to fill inside the array.
+	Example:
+		np.full((2,4),fill_value=2)
+		--------------
+			array([[2, 2, 2, 2],
+				[2, 2, 2, 2]])
+			(2,4) : ꜱʜᴀᴘᴇ
+11. Identity
+	Create an identity matrix with specified dimensions.
+		np.identity(n, dtype=None)
+	Example:
+		np.identity(4)
+		----------
+			array([[1., 0., 0., 0.],
+				[0., 1., 0., 0.],
+				[0., 0., 1., 0.],
+				[0., 0., 0., 1.]])
+			ᴅᴇꜰᴀᴜʟᴛ ᴅᴀᴛᴀ ᴛʏᴘᴇ ɪꜱ `ꜰʟᴏᴀᴛ`
+
+----- Array Operations -----
+12. Min
+	Return the minimum value from the array.
+		np.min(arr, axis=None, out=None, keepdims=<no value>, initial=<no value>, where=<no value>)
+	Important params:
+		axis: axis along which to operate.
+		out: alternative array to store the output. 
+	Example:
+		arr = np.array([1,1,2,3,3,4,5,6,6,2])
+		np.min(arr)
+		----------------
+			1
+13. Max
+	Return the maximum value from the array.
+		np.max(arr, axis=None, out=None)
+	Example:
+		np.max(arr)
+		------------------
+			6
+14. Unique
+	Return an array with all the unique elements sorted.
+		np.unique(arr, return_index=False, return_inverse=False, return_counts=False, axis=None)
+	Important params:
+		return_index: if True, return the indices of the array.
+		return_inverse: if True, return the indices of the unique array. 
+		return_counts: if True, return the number of times each unique element appears inside the array.
+		axis: The axis to operate on. By default, the array is considered flattened.
+	Example:
+		np.unique(arr,return_counts=True)
+		---------------------
+			(
+			 array([1, 2, 3, 4, 5, 6]),             ## Unique elements
+			 array([2, 2, 2, 1, 1, 2], dtype=int64) ## Count
+			)
+15. Mean
+	It is used to get the mean of the array.
+		np.mean(arr, axis=None, dtype=None, out=None)
+	Example:
+	np.mean(arr,dtype='int')
+	-------------------------------
+		3
+16. Median
+	Return the median value of the array.
+		np.median(arr, axis=None, out=None)
+	Example:
+		arr = np.array([[1,2,3],[5,8,4]])
+		np.median(arr)
+		-----------------------------
+			3.5
+17. Digitize
+	Return the indices of the bins to which each value in the input array belongs.
+		np.digitize(x, bins, right=False)
+	Important params
+		bins: Array of bins.
+		right: Indicates whether the interval includes the right or left bin edge.
+	Example:
+		a = np.array([-0.9, 0.5, 0.9, 1, 1.2, 1.4, 3.6, 4.7, 5.3])
+		bins = np.array([0,1,2,3])
+		np.digitize(a,bins)
+		-------------------------------
+			array([0, 1, 1, 2, 2, 2, 4, 4, 4], dtype=int64)
+
+			Exp        Value
+			x < 0     :   0
+			0 <= x <1 :   1
+			1 <= x <2 :   2
+			2 <= x <3 :   3
+			3 <=x     :   4
+			Compares -0.9 to 0, here x < 0 so Put 0 in resulting array.
+			Compares  0.5 to 0, here 0 <= x <1 so Put 1.
+			.
+			Compares 5.4 to 4, here 3<=x so Put 4
+18. Reshape
+	It is one of the most used functions of NumPy. It Returns an array containing the same data with a new shape.
+		np.reshape(shape)
+	Example:
+		A = np.random.randint(15,size=(4,3))
+		A
+		----------------------
+			array([[ 8, 14,  1],
+				[ 8, 11,  4],
+				[ 9,  4,  1],
+				[13, 13, 11]])
+		A.reshape(3,4)
+		-----------------
+			array([[ 8, 14,  1,  8],
+				[11,  4,  9,  4],
+				[ 1, 13, 13, 11]])
+		A.reshape(-1)  
+		-------------------
+			array([ 8, 14,  1,  8, 11,  4,  9,  4,  1, 13, 13, 11])
+19. Expand Dimensions
+	It is used to expand the dimensions of an array. This method is useful for creating sample test data for testing a machine learning model.
+		np.expand_dims(a, axis)
+	Example:
+		arr = np.array([ 8, 14,  1,  8, 11,  4,  9,  4, 1, 13, 13, 11])
+
+		np.expand_dims(A,axis=0)
+		-------------------------
+			array([[ 8, 14,  1,  8, 11,  4,  9,  4,  1, 13, 13, 11]])
+		np.expand_dims(A,axis=1)
+		---------------------------
+			array([[ 8],
+				[14],
+				[ 1],
+				[ 8],
+				[11],
+				[ 4],
+				[ 9],
+				[ 4],
+				[ 1],
+				[13],
+				[13],
+				[11]])
+20. Squeeze
+	Reduce the dimension of an array by removing single-dimensional entries.
+		np.squeeze(arr, axis=None)
+	Example:
+		arr = np.array([[ 8],[14],[ 1],[ 8],[11],[ 4],[ 9],[ 4],[ 1],[13],[13],[11]])
+		np.squeeze(arr)
+		---------------------------
+			array([ 8, 14,  1,  8, 11,  4,  9,  4,  1, 13, 13, 11])
+21. Count Non-Zero
+	Count all the non-zero elements and return their count.
+		np.count_nonzero(arr, axis=None, *, keepdims=False)
+	Example:
+		a = np.array([0,0,1,1,1,0])
+		np.count_nonzero(a)
+		--------------------------
+			3
+22. argwhere
+	Find and return all the indices of non-zero elements.
+		np.argwhere(arr)
+	Example:
+		a = np.array([0,0,1,1,1,0])
+		np.argwhere(a)
+		---------------------
+			array([[2],[3],[4]], dtype=int64)
+23. argmax & argmin
+	argmax returns the index of the max element from the array. It can be used to get the index of high probability predicted labels in multiclass image classification problems.
+	argmin will return the index of the lowest element from the array.
+		np.argmax(arr, axis=None, out=None)
+		np.argmin(arr, axis=None, out=None)
+	Example:
+		arr = np.array([[0.12,0.64,0.19,0.05]])
+		np.argmax(arr)
+		---------
+			1
+		np.argmin(min)
+		---------
+			3
+24. Sort
+	Sort the array and return.
+		np.sort(arr, axis=-1, kind=None, order=None)
+	Important params:
+		kind: Sorting algorithm to use. {‘quicksort’, ‘mergesort’, ‘heapsort’, ‘stable’}
+	Example:
+		arr = np.array([2,3,1,7,4,5])
+		np.sort(arr)
+		----------------
+			array([1, 2, 3, 4, 5, 7])
+25. Abs
+	Return the absolute values of elements inside an array. It is useful when an array contains negative values.
+	Example:
+		A = np.array([[1,-3,4],[-2,-4,3]])
+		np.abs(A)
+		---------------
+			array([[1, 3, 4],
+				[2, 4, 3]])
+26. Round
+	Round the float values to a specified number of decimal points.
+		np.round(arr, decimal=0, out=None)
+	Important params:
+		decimals: Number of decimals point to keep.
+	Example:
+		a = np.random.random(size=(3,4))
+		a
+		-----
+			array([[0.81695699, 0.42564822, 0.65951417, 0.2731807 ],
+				[0.7017702 , 0.12535894, 0.06747666, 0.55733467],
+				[0.91464488, 0.26259026, 0.88966237, 0.59253923]])
+		np.round(a,decimals=0)
+		------------
+			array([[1., 0., 1., 1.],
+				[1., 1., 1., 1.],
+				[0., 1., 0., 1.]])
+		np.round(a,decimals=1)
+		-------------
+			array([[0.8, 0. , 0.6, 0.6],
+				[0.5, 0.7, 0.7, 0.8],
+				[0.3, 0.9, 0.5, 0.7]])
+27. Clip
+	It is used to keep the values of an array within a range.
+	Example:
+		arr = np.array([0,1,-3,-4,5,6,7,2,3])
+		arr.clip(0,5)
+		-----------------
+			array([0, 1, 0, 0, 5, 5, 5, 2, 3])
+		arr.clip(0,3)
+		------------------
+			array([0, 1, 0, 0, 3, 3, 3, 2, 3])
+		arr.clip(3,5)
+		------------------
+			array([3, 3, 3, 3, 5, 5, 5, 3, 3])
+-------- Replacing Values Inside Array ---------
+28. Where
+	Return elements from an array where a condition satisfies.
+		np.where(condition, [x, y])
+	Important params:
+		condition: condition to match. if true yield xotherwise y.
+	Example:
+		a = np.arange(12).reshape(4,3)
+		a
+		-------
+			array([[ 0,  1,  2],
+				[ 3,  4,  5],
+				[ 6,  7,  8],
+				[ 9, 10, 11]])
+		np.where(a>5)      ## Get The Index
+		--------------------
+			(array([2, 2, 2, 3, 3, 3], dtype=int64),
+			 array([0, 1, 2, 0, 1, 2], dtype=int64))
+			'''
+			[2][0] ᴇʟᴇᴍᴇɴᴛ (2ɴꜱ ʀᴏᴡ 0ᴛʜ ᴄᴏʟᴜᴍɴ) 6 > 5, ʀᴇᴛᴜʀɴ
+			[2][1] ᴇʟᴇᴍᴇɴᴛ (2ɴᴅ ʀᴏᴡ 1ꜱᴛ ᴄᴏʟᴜᴍɴ) 7 > 5, ʀᴇᴛᴜʀɴ
+			.
+			[3][2] ᴇʟᴇᴍᴇɴᴛ (3ᴅ ʀᴏᴡ 2ɴᴅ ᴄᴏʟᴜᴍɴ) 11 > 5, ʀᴇᴛᴜʀɴ
+			'''
+		a[np.where(a>5)]  ## Get Values
+		--------------------------
+			array([ 6,  7,  8,  9, 10, 11])
+	It can also be used to replace elements inside the panda’s data frame.
+	Example:
+		np.where(data[feature].isnull(), 1, 0)
+		'''
+		Replace Null Values with 1 and other as 0
+		'''
+28. Put
+	Replaces specified elements of an array with given values.
+		np.put(arr, ind, v)
+	Important params:
+		a: array
+		ind: indices to be replaced.
+		v: values to place.
+	Example:
+		arr = np.array([1,2,3,4,5,6])
+		arr
+		--------
+			array([1, 2, 3, 4, 5, 6])
+		np.put(arr,[1,2],[6,7])
+		arr
+		--------
+			array([1, 6, 7, 4, 5, 6])
+29. Copyto
+	Copy the content of one array into another.
+		np.copyto(dst, src, casting='same_kind', where=True)
+	Important params:
+		dst: array into which values are copied.
+		src: array from which values are copied.
+	Example:
+		arr1 = np.array([1,2,3])
+		arr2 = np.array([4,5,6])
+		print("Before arr1",arr1)
+		print("Before arr2",arr1)
+
+		np.copyto(arr1,arr2)
+		print("After arr1",arr1)
+		print("After arr2",arr2)
+		---------------------------
+			Before arr1 [1 2 3]
+			Before arr2 [4 5 6]
+
+			After arr1 [4 5 6]
+			After arr2 [4 5 6]
+----- Set Operations -----
+30. Retrieve Common Elements
+	np.intersect1d function returns all the unique values from both arrays in a sorted manner.
+		np.intersect(arr1, arr2, assume_unique=False, return_indices=False)
+	Important params:
+		assume_unique: if true, then input arrays are both assumed to be unique.
+		return_indices: if true, then common elements indices are returned.
+	Example:
+		ar1 = np.array([1,2,3,4,5,6])
+		ar2 = np.array([3,4,5,8,9,1])
+		np.intersect1d(ar1,ar2)
+		---------------
+			array([1, 3, 4, 5])
+
+		np.intersect1d(ar1,ar2,return_indices=True)
+		---------------
+			(array([1, 3, 4, 5]),                 ## Common Elements
+				array([0, 2, 3, 4], dtype=int64),    
+				array([5, 0, 1, 2], dtype=int64)) 
+		'''
+		array([0, 2, 3, 4], dtype=int64) :- Indices of common elements inside first array.
+		array([5, 0, 1, 2], dtype=int64)) :- Indices of common elements inside second array.
+		'''
+31. Difference
+	np.setdiff1d function returns all the unique elements from array 1 that are not present in arr2.
+	Example:
+		a = np.array([1, 7, 3, 2, 4, 1])
+		b = np.array([9, 2, 5, 6, 7, 8])
+
+		np.setdiff1d(a, b)
+		---------------------
+			array([1, 3, 4])
+32. Extracts Unique Elements From Both Arrays
+	setxor1dfunction will return all the unique values from both arrays in sorted order.
+	Example:
+		a = np.array([1, 2, 3, 4, 6])
+		b = np.array([1, 4, 9, 4, 36])
+
+		np.setxor1d(a,b)
+		--------------------
+			array([ 2,  3,  6,  9, 36])
+33. Union
+	union1d function will combine both arrays into one.
+	Example:
+		a = np.array([1, 2, 3, 4, 5])
+		b = np.array([1, 3, 5, 4, 36])
+
+		np.union1d(a,b)
+		-------------------
+			array([ 1,  2,  3,  4,  5, 36])
+----- Splitting -----
+34. Horizontal Split
+	hsplit function will split the data horizontally into n equal parts.
+	Example:
+		A = np.array([[3,4,5,2],[6,7,2,6]])
+
+		np.hsplit(A,2)    ## splits the data into two equal parts
+		---------------
+			[  array([[3, 4],[6, 7]]),  array([[5, 2],[2, 6]])  ]
+
+		np.hsplit(A,4)    ## splits the data into four equal parts
+		-----------------
+			[  array([[3],[6]]),  array([[4],[7]]),
+			   array([[5],[2]]),  array([[2],[6]])  ]
+35. Vertical Split
+	vsplit will split the data vertically into n equal parts.
+	Example:
+		A = np.array([[3,4,5,2],[6,7,2,6]])
+		np.vsplit(A,2)
+		----------------
+			[ array([[3, 4, 5, 2]]),  array([[6, 7, 2, 6]]) ]
+----- Stacking -----
+36. Horizontal Stacking
+	hstack will stack appends one array at the end of another.
+	Example:
+		a = np.array([1,2,3,4,5])
+		b = np.array([1,4,9,16,25])
+
+		np.hstack((a,b))
+		---------------------
+			array([ 1,  2,  3,  4,  5,  1,  4,  9, 16, 25])
+37. Vertical Stacking
+	vstack will stack one array on top of another.
+	Example:
+		np.vstack((a,b))
+		----------------------
+			array([[ 1,  2,  3,  4,  5],
+				[ 1,  4,  9, 16, 25]])
+----- Comparing Two Arrays -----
+38. allclose
+	np.allclose function finds whether two arrays are equal or approximately equal to each other based on some tolerance value if the shape of both arrays is the same.
+	Example:
+		a = np.array([0.25,0.4,0.6,0.32])
+		b = np.array([0.26,0.3,0.7,0.32])
+
+		tolerance = 0.1           ## Total Difference 
+		np.allclose(a,b,tolerance)
+		---------
+			False
+
+		tolerance = 0.5
+		np.allclose(a,b,tolerance)
+		----------
+			True
+39. Equals
+	It compares each element of both arrays and if elements matched returns True.
+	Example:
+		np.equal(arr1,arr2)
+		-------------
+			array([ True,  True,  True, False,  True,  True])
+----- Repeating Array Elements -----
+40. Repeat
+	It is used to repeat elements of an array for n number of times.
+		np.repeat(arr, repeats, axis=None)
+	Important params:
+		a: element to repeat. 
+		repeats: number of times to repeat element.
+	Example:
+		np.repeat('2017',3)
+		---------------------
+			array(['2017', '2017', '2017'], dtype='<U4')
+	Let’s take a more practical use case example, we have a dataset containing year-wise container quantity sales.
+		fruits = pd.DataFrame([
+    			['Mango',40],
+    			['Apple',90],
+    			['Banana',130]
+			],columns=['Product','ContainerSales'])
+		fruits
+		----------------
+			--------------------------------
+			| # | Product | ContainerSales |
+			|------------------------------|
+			| 0 | Mango   |	      40       |
+			|------------------------------|
+			| 1 | Apple   |       90       |
+			|------------------------------|
+			| 2 | Banana  |       130      |
+			--------------------------------
+	In the dataset, the year column is missing. Let’s try to add it using numpy.
+
+		fruits['year'] = np.repeat(2020,fruits.shape[0])
+
+		'''
+		Above code will repeat the year 2020 n times, where n is the length of data.
+		'''
+
+		fruits
+		----------------
+			---------------------------------------
+			| # | Product | ContainerSales | year |
+			|-------------------------------------|
+			| 0 | Mango   |       40       | 2020 |
+			|-------------------------------------|
+			| 1 | Apple   |       90       | 2020 |
+			|-------------------------------------|
+			| 2 | Banana  |       130      | 2020 |
+			---------------------------------------
+41. tile
+	Construct an array by repeating A the number of times given by reps.
+		np.tile(A, reps)
+	Example:
+		np.tile("Ram",5)
+		-------
+			array(['Ram', 'Ram', 'Ram', 'Ram', 'Ram'], dtype='<U3')
+
+		np.tile(3,(2,3))
+		-------
+			array([[3, 3, 3], [3, 3, 3]])
+----- Einstein Summation Conventions -----
+42. Einsum
+	This function is used to compute many multi-dimensional and linear algebraic operations on arrays.
+	Example:
+		a = np.arange(1,10).reshape(3,3)
+		b = np.arange(21,30).reshape(3,3)
+
+		# ᴇxᴛʀᴀᴄᴛꜱ ᴅɪᴀɢᴏɴᴀʟꜱ
+		np.einsum('ii->i',a)
+		------------
+			array([1, 5, 9])
+		# ᴛʀᴀɴꜱᴘᴏꜱᴇ
+		np.einsum('ji',a)
+		------------
+			array([[1, 4, 7], 
+				[2, 5, 8], 
+				[3, 6, 9]])
+		# ᴍᴀᴛʀɪx ᴍᴜʟᴛɪᴘɪᴄᴀᴛɪᴏɴ
+		np.einsum('ij,jk',a,b)
+		------------
+			array([[150, 156, 162],
+				[366, 381, 396],
+				[582, 606, 630]])
+		# ꜱᴜᴍ ᴏꜰ ᴅɪᴀɢᴏɴᴀʟ
+		np.einsum('ii',a)
+		----------
+			15
+----- Statistical Analysis ------
+43. Histogram
+	It is an important statistical analysis function of NumPy that computes histogram values for a set of data.
+	Example: 
+		A = np.array([[3, 4, 5, 2], [6, 7, 2, 6]])
+		np.histogram(A)
+		-------------------
+			(array([2, 0, 1, 0, 1, 0, 1, 0, 2, 1], dtype=int64),
+				array([2. , 2.5, 3. , 3.5, 4. , 4.5, 5. , 5.5, 6. , 6.5, 7. ]))
+44. Percentile
+	It computes the q-th percentile of the data along a specified axis.
+	Important params:
+		a: array like input.
+		q: percentile to compute.
+		overwrite_input: if true, then allow the input array to modify the intermediate calculation to save memory. default= False
+	Example:
+		a = np.array([[2, 4, 6], [4, 8, 12]])
+
+		np.percentile(a, 50)
+		-----------
+			5.0
+
+		np.percentile(a, 10)
+		------------
+			3.0
+
+		arr = np.array([2,3,4,1,6,7])
+		np.percentile(arr,5)
+		------------
+			1.25
+45. Standard Deviation and Variance
+	std and var are two functions of NumPy that calculates standard deviation and variance along an axis.
+	Example:
+		a = np.array([[2, 4, 6], [4, 8, 12]])
+
+		----- Standard Deviation --------
+
+		np.std(a,axis=1)    ## Row Wise
+		--------
+			array([1.63299316, 3.26598632])
+
+		np.std(a,axis=0)    ## Column Wise
+		--------
+			array([1., 2., 3.])
+
+		----- Variance ----------
+
+		np.var(a,axis=1)
+		-------------------
+			array([ 2.66666667, 10.66666667])
+
+		np.var(a,axis=0)
+		-------------------
+			array([1., 4., 9.])
+
+------ Array Printing Options ------
+46. Show Floats With Two Decimal Values
+	Example:
+		np.set_printoptions(precision=2)
+
+		a = np.array([12.23456,32.34535])
+		print(a)
+		------------
+			array([12.23,32.34])
+47. Prints Array To Its Max
+	Example:
+		np.set_printoptions(threshold=np.inf)
+48. Increase The Number of Elements In a Line
+	Example:
+		np.set_printoptions(linewidth=100) ## Default 75
+
+----- Save and Load Array Data -----
+49. Save
+	savetxt used to save the content of an array inside a text file.
+	Example:
+		''' Generate array with 500 elements '''
+		arr = np.linspace(10,100,500).reshape(25,20) 
+
+		np.savetxt('array.txt',arr)
+50. Load
+	loadtxt used to load the content of an array from a text file. It takes the file name as a parameter.
+	Example:
+		np.loadtxt('array.txt') 

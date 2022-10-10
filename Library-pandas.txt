@@ -1,0 +1,106 @@
+1. pd.read_csv, pd.read_excel
+	Example:
+		df = pd.read_csv("fifa.csv")
+		data = pd.read_csv(file.txt, sep=" ")
+2. df.columns
+	When you have a big dataset like that it can be hard to see all the columns. using .columns function, you can print out all the columns of the dataset:
+	Example:
+		df.columns
+3. df.drop()
+	You can drop some unnecessary columns using df.drop(). In this dataset we have so many columns we are not going to use all of them for this tutorial. So, we can easily drop some:
+	Example:
+		df = df.drop(columns=['Unnamed: 0', 'weak_foot', 'real_face'])
+4. .len()
+	Provides with the length of the DataFrame. 
+	Example:
+		len(df)
+5. df.query()
+	You can filter or query using a boolean expression. I will use ‘shooting’ and ‘passing’ columns for this example. 
+	Example:
+		df.query("shooting > passing")
+	This will return the rows only where the shooting is bigger than passing.
+6. df.iloc()
+	This function takes as a parameter the rows and column indices and gives you the subset of the DataFrame accordingly. Here I am taking the first 10 rows of data and index 5th to index 10th columns:
+	Example:
+		df.iloc[:10, 5:10]
+	(take first 10 rows and columns 5 through 10)
+7. df.loc()
+	This function does almost the similar operation as .iloc() function. But here we can specify exactly which row index we want and also the name of the columns we want in our subset.
+	Example:
+		df.loc[[3, 10, 14, 23], ['nationality', 'weight_kg', "height_cm"]]
+		df.loc[5:10, ['nationality', 'weight_kg', "height_cm"]]
+8. df[‘’].dtypes
+	Another very basic and widely used functions. Because it is necessary to know the data types of the variables before we dive into the analysis, visualization, or predictive modeling.
+	Example:
+		df.COLUMN_NAME.dtypes
+
+		To get all the columns:
+		df.dtypes
+9. df.select_dtypes()
+	You can select the variables or columns of a certain data type using this function. For example, I want to select the columns with data types ‘int64’ only.
+		df.select_dtypes(include='int64')
+	If we use ‘exclude’ instead of ‘include’ in the ‘select_dtypes’ function, we will get the columns that do not have the data type ‘int64’:
+		df.select_dtypes(exclude='int64')
+10. df.insert()
+	As the name of the function suggests, it inserts a column in the specified position.
+	Example:
+		Let's create a column with random ints
+			random_col = np.random.randint(100, size=len(df))
+		Insert this array as a column in the DataFrame df at column 3 position.
+			df.insert(3, 'random_col', random_col)
+11. df[‘’].cumsum()
+	It provides you with the cumulative sum of all the values of the previous rows.
+		df[['column_1', 'column_2']].cumsum()
+12. df.sample()
+	When the size of the dataset is too big, you can take a representative sample from it to perform the analysis and predictive modeling. That may save you some time. Also, too much data may ruin the visualization sometimes. we can use this function to get a certain number of data points or a certain fraction or data point. 
+		Here we are taking a sample of 200 data points from the FIFA dataset. It takes a random sample.
+			df.sample(n = 200)
+		Now taking 25% of the FIFA dataset here:
+			df.sample(frac = 0.25)
+13. df[‘’].where()
+	This function helps you query a dataset based on a boolean condition. For an example, the random_col we made before has the values ranging from 0 to 100. Here is how we make a series to see which of them are bigger than 50.
+		df['random_col'].where(df['random_col'] > 50)
+14. df[‘’].unique()
+	This is very useful where we have categorical variables. It is used to find out the unique values of a categorical column.
+	Let’s see what are the unique values of the ‘skill_moves’ column:
+		df.skill_moves.unique()
+15. df[‘’].nunique()
+	Another popular function. This function lets you know how many unique values do you have in a column. As an example, if you want to see how many different nationalities are there in this dataset, you can use this simple line of code
+		df.nationality.nunique()
+	The great thing is, this function can be used on the total dataset as well to know the number of unique values in each column:
+		df.nunique()
+16. df[‘’].rank()
+	This function provides you with the rank based on a certain column. In the FIFA dataset, if we want to rank the players based on the ‘value_eur’ column, here is the syntax for that:
+		df['rank_calc'] = df["value_eur"].rank()
+	Using the line of code above, I created a new column named ‘rank_calc’. This new column will give you the ranks of each player based on the ‘value_eur’. The column will be added at the end by default. 
+17. .isin()
+	I am going to make a subset of the dataset that will contain only a few nationalities of players using .isin() function.
+		nationality = ["Argentina", "Portugal", "Sweden", "England"]
+		df[df.nationality.isin(nationality)]
+	If you run this code you will see we have the resulting dataset containing only those few countries mentioned in the list above. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
